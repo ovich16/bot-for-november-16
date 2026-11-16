@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 TG_TOKEN = os.getenv('TG_TOKEN')
 
+from aiassistant import ask_ai
+
 bot = telebot.TeleBot(TG_TOKEN)
 print('hey')
 
@@ -31,11 +33,14 @@ def send_text(message):
         bot.send_message(user, 'well')
         bot.send_message(user, 'see you')
 
-    elif message.text == 'random':
+    elif message.text == 'random number':
         bot.send_message(user, f'The random number for you is {random.randint(1,10)}')
 
-    elif message.text == 'country':
+    elif message.text == 'random country':
         bot.send_message(user, f'The random country for you is {random.choice(lines).strip()}')
+
+    elif message.text == 'ai assistant':
+        ask_ai()
     
     else:
         bot.send_message(message.chat.id, 'hahaha ¯\_(ツ)_/¯ ')
