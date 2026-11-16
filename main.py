@@ -1,6 +1,6 @@
-import telebot
+import telebot, random
 
-bot = telebot.TeleBot('7616846443:AAGTGHsvz9jqKlbrr78b-fan6DYLoTbXxGU')
+bot = telebot.TeleBot(TG_TOKEN)
 print('hey')
 
 #start command
@@ -8,6 +8,9 @@ print('hey')
 def start_message(message):
     user = message.chat.id
     bot.send_message(user,'Hello \n you cracket!!! ')
+
+with open('countries.txt', encoding='utf-8') as f:
+    lines = f.readlines()
 
 #main code
 @bot.message_handler(content_types=['text'])
@@ -23,6 +26,13 @@ def send_text(message):
     elif message.text == 'bye':
         bot.send_message(user, 'well')
         bot.send_message(user, 'see you')
+
+    elif message.text == 'random':
+        bot.send_message(user, f'The random number for you is {random.randint(1,10)}')
+
+    elif message.text == 'country':
+        bot.send_message(user, f'The random country for you is {random.choice(lines).strip()}')
+    
     else:
         bot.send_message(message.chat.id, 'hahaha ¯\_(ツ)_/¯ ')
 
